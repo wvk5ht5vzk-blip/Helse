@@ -53,9 +53,11 @@ async function saveEntry() {
 
   } catch (error) {
 
-    console.error(error);
+  console.error(error);
 
-    alert("Feil ved lagring ❌");
+  alert(error.message);
+
+}
 
   }
 }
