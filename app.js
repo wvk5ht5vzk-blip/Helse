@@ -60,7 +60,37 @@ async function saveEntry() {
 
   alert(error.message);
 
+async function loadHistory() {
 
+  const historyDiv = document.getElementById("history");
+
+  const q = query(
+    collection(db, "entries"),
+    orderBy("createdAt", "desc")
+  );
+
+  const snapshot = await getDocs(q);
+
+  historyDiv.innerHTML = "";
+
+  snapshot.forEach(doc => {
+
+    const data = doc.data();
+
+    historyDiv.innerHTML += `
+      <div class="history-card">
+        <strong>${data.date}</strong><br>
+        😴 ${data.sleep}
+        😊 ${data.mood}
+        ⚡ ${data.energy}
+        😰 ${data.stress}
+        🏃 ${data.activity}
+      </div>
+    `;
+  });
+}
+
+loadHistory();
 
   }
 }
