@@ -5,7 +5,7 @@ import {
   addDoc,
   getDocs,
   query,
-  orderBy
+  orderBy,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
@@ -17,7 +17,7 @@ const sliders = [
   "activity"
 ];
 
-// Oppdater tall ved slider
+// Oppdater slider-verdier
 sliders.forEach(id => {
 
   const slider = document.getElementById(id);
@@ -28,6 +28,9 @@ sliders.forEach(id => {
   });
 
 });
+
+// Last historikk ved oppstart
+loadHistory();
 
 // Lagre-knapp
 document.getElementById("saveBtn").addEventListener("click", saveEntry);
@@ -54,15 +57,23 @@ async function saveEntry() {
 
     alert("Logg lagret ✅");
 
+    loadHistory();
+
   } catch (error) {
 
-  console.error(error);
+    console.error(error);
 
-  alert(error.message);
+    alert(error.message);
+
+  }
+
+}
 
 async function loadHistory() {
 
   const historyDiv = document.getElementById("history");
+
+  if (!historyDiv) return;
 
   const q = query(
     collection(db, "entries"),
@@ -87,10 +98,7 @@ async function loadHistory() {
         🏃 ${data.activity}
       </div>
     `;
+
   });
-}
 
-loadHistory();
-
-  }
 }
