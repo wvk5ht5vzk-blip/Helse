@@ -162,4 +162,41 @@ async function loadHistory() {
 
 }
 
+async function loadTodayStatus() {
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const docRef = doc(db, "entries", today);
+
+  const docSnap = await getDoc(docRef);
+
+  const statusDiv = document.getElementById("todayStatus");
+
+  if (!statusDiv) return;
+
+  if (!docSnap.exists()) {
+
+    statusDiv.innerHTML = `
+      Ingen logg registrert i dag.
+    `;
+
+    return;
+  }
+
+  const data = docSnap.data();
+
+  statusDiv.innerHTML = `
+    😴 ${data.sleep}
+    &nbsp;&nbsp;
+    😊 ${data.mood}
+    &nbsp;&nbsp;
+    ⚡ ${data.energy}
+    &nbsp;&nbsp;
+    😰 ${data.stress}
+    &nbsp;&nbsp;
+    🏃 ${data.activity}
+  `;
+}
+
 loadHistory();
+loadTodayStatus();
