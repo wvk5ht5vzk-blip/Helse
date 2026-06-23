@@ -1,47 +1,128 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helse Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helse Tracker</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>🧠 Helse Tracker</h1>
+  <!-- HJEM -->
+  <section id="home-screen" class="screen active">
+
+    <h1>🏠 Hjem</h1>
+
+    <div class="card">
+      <h2>Velkommen 👋</h2>
+      <p>Oversikt over din helse og trivsel.</p>
+    </div>
+
+    <div class="card">
+      <h2>🔥 Streak</h2>
+      <p id="streakText">0 dager på rad</p>
+    </div>
+
+    <div class="card">
+      <h2>💡 Innsikt</h2>
+      <p>Mer innsikt kommer snart.</p>
+    </div>
+
+  </section>
+
+  <!-- LOGG -->
+  <section id="log-screen" class="screen">
+
+    <h1>➕ Loggfør dagen</h1>
 
     <div class="card">
 
-        <label>😴 Søvn: <span id="sleepValue">5</span></label>
-        <input type="range" id="sleep" min="1" max="10" value="5">
+      <label>😴 Søvn: <span id="sleepValue">5</span></label>
+      <input type="range" id="sleep" min="1" max="10" value="5">
 
-        <label>😊 Humør: <span id="moodValue">5</span></label>
-        <input type="range" id="mood" min="1" max="10" value="5">
+      <label>😊 Humør: <span id="moodValue">5</span></label>
+      <input type="range" id="mood" min="1" max="10" value="5">
 
-        <label>⚡ Energi: <span id="energyValue">5</span></label>
-        <input type="range" id="energy" min="1" max="10" value="5">
+      <label>⚡ Energi: <span id="energyValue">5</span></label>
+      <input type="range" id="energy" min="1" max="10" value="5">
 
-        <label>😰 Stress: <span id="stressValue">5</span></label>
-        <input type="range" id="stress" min="1" max="10" value="5">
+      <label>😰 Stress: <span id="stressValue">5</span></label>
+      <input type="range" id="stress" min="1" max="10" value="5">
 
-        <label>🏃 Aktivitet: <span id="activityValue">5</span></label>
-        <input type="range" id="activity" min="1" max="10" value="5">
+      <label>🏃 Aktivitet: <span id="activityValue">5</span></label>
+      <input type="range" id="activity" min="1" max="10" value="5">
 
-        <label>📝 Notater</label>
-        <textarea id="notes"></textarea>
+      <label>📝 Notater</label>
+      <textarea id="notes"></textarea>
 
-        <button id="saveBtn">
-            Lagre dagens logg
-        </button>
+      <button id="saveBtn">
+        Lagre dagens logg
+      </button>
 
     </div>
 
-    <script type="module" src="app.js"></script>
+  </section>
 
-    <h2>📊 Historikk</h2>
+  <!-- HISTORIKK -->
+  <section id="history-screen" class="screen">
 
-<div id="history"></div>
-    
+    <h1>📖 Historikk</h1>
+
+    <div id="history"></div>
+
+  </section>
+
+  <!-- INNSIKT -->
+  <section id="insights-screen" class="screen">
+
+    <h1>📈 Innsikt</h1>
+
+    <div class="card">
+      <h2>Kommer snart</h2>
+      <p>Grafer og analyser bygges i neste versjon.</p>
+    </div>
+
+  </section>
+
+  <!-- PROFIL -->
+  <section id="profile-screen" class="screen">
+
+    <h1>👤 Profil</h1>
+
+    <div class="card">
+      <h2>Innstillinger</h2>
+      <p>Påminnelser, mørk modus og eksport kommer senere.</p>
+    </div>
+
+  </section>
+
+  <!-- BUNNMENY -->
+  <nav class="bottom-nav">
+
+    <button data-screen="home-screen">
+      🏠
+    </button>
+
+    <button data-screen="history-screen">
+      📖
+    </button>
+
+    <button class="plus-btn" data-screen="log-screen">
+      ➕
+    </button>
+
+    <button data-screen="insights-screen">
+      📈
+    </button>
+
+    <button data-screen="profile-screen">
+      👤
+    </button>
+
+  </nav>
+
+  <script type="module" src="app.js"></script>
+
 </body>
 </html>
