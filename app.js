@@ -9,6 +9,42 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
+/* -------------------------
+   NAVIGASJON
+------------------------- */
+
+const screens = document.querySelectorAll(".screen");
+const navButtons = document.querySelectorAll("[data-screen]");
+
+function showScreen(screenId) {
+
+  screens.forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  document.getElementById(screenId).classList.add("active");
+
+  if (screenId === "history-screen") {
+    loadHistory();
+  }
+}
+
+navButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const screenId = button.dataset.screen;
+
+    showScreen(screenId);
+
+  });
+
+});
+
+/* -------------------------
+   SLIDERS
+------------------------- */
+
 const sliders = [
   "sleep",
   "mood",
@@ -17,7 +53,6 @@ const sliders = [
   "activity"
 ];
 
-// Oppdater slider-verdier
 sliders.forEach(id => {
 
   const slider = document.getElementById(id);
@@ -29,11 +64,13 @@ sliders.forEach(id => {
 
 });
 
-// Last historikk ved oppstart
-loadHistory();
+/* -------------------------
+   LAGRING
+------------------------- */
 
-// Lagre-knapp
-document.getElementById("saveBtn").addEventListener("click", saveEntry);
+document
+  .getElementById("saveBtn")
+  .addEventListener("click", saveEntry);
 
 async function saveEntry() {
 
@@ -57,7 +94,11 @@ async function saveEntry() {
 
     alert("Logg lagret ✅");
 
+    document.getElementById("notes").value = "";
+
     loadHistory();
+
+    showScreen("home-screen");
 
   } catch (error) {
 
@@ -68,6 +109,10 @@ async function saveEntry() {
   }
 
 }
+
+/* -------------------------
+   HISTORIKK
+------------------------- */
 
 async function loadHistory() {
 
@@ -90,15 +135,26 @@ async function loadHistory() {
 
     historyDiv.innerHTML += `
       <div class="history-card">
-        <strong>${data.date}</strong><br>
+        <strong>${data.date}</strong><br><br>
+
         😴 ${data.sleep}
+        &nbsp;&nbsp;
         😊 ${data.mood}
+        &nbsp;&nbsp;
         ⚡ ${data.energy}
+        &nbsp;&nbsp;
         😰 ${data.stress}
+        &nbsp;&nbsp;
         🏃 ${data.activity}
+
+        <br><br>
+
+        📝 ${data.notes || ""}
       </div>
     `;
 
   });
 
 }
+
+loadHistory();
