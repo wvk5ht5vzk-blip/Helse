@@ -133,7 +133,7 @@ button {
 
   align-items: center;
 
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 
   gap: 12px;
 
