@@ -186,16 +186,35 @@ async function loadTodayStatus() {
   const data = docSnap.data();
 
   statusDiv.innerHTML = `
-    😴 ${data.sleep}
-    &nbsp;&nbsp;
-    😊 ${data.mood}
-    &nbsp;&nbsp;
-    ⚡ ${data.energy}
-    &nbsp;&nbsp;
-    😰 ${data.stress}
-    &nbsp;&nbsp;
-    🏃 ${data.activity}
-  `;
+  <div class="status-grid">
+
+    <div class="status-item">
+      <div class="emoji">😴</div>
+      <div class="value">${data.sleep}</div>
+    </div>
+
+    <div class="status-item">
+      <div class="emoji">😊</div>
+      <div class="value">${data.mood}</div>
+    </div>
+
+    <div class="status-item">
+      <div class="emoji">⚡</div>
+      <div class="value">${data.energy}</div>
+    </div>
+
+    <div class="status-item">
+      <div class="emoji">😰</div>
+      <div class="value">${data.stress}</div>
+    </div>
+
+    <div class="status-item">
+      <div class="emoji">🏃</div>
+      <div class="value">${data.activity}</div>
+    </div>
+
+  </div>
+`;
 }
 
 loadHistory();
