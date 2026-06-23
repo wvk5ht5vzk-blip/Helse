@@ -78,9 +78,11 @@ async function saveEntry() {
 
   try {
 
-    await addDoc(collection(db, "entries"), {
+    const today = new Date().toISOString().split("T")[0];
 
-      date: new Date().toISOString().split("T")[0],
+    await setDoc(doc(db, "entries", today), {
+
+      date: today,
 
       sleep: Number(document.getElementById("sleep").value),
       mood: Number(document.getElementById("mood").value),
@@ -98,7 +100,8 @@ async function saveEntry() {
 
     document.getElementById("notes").value = "";
 
-    loadHistory();
+    await loadHistory();
+    await loadTodayStatus();
 
     showScreen("home-screen");
 
